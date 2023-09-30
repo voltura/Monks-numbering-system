@@ -9,6 +9,11 @@
 
         private void Get_Click(object sender, EventArgs e)
         {
+            DisplayMonksNumber();
+        }
+
+        private void DisplayMonksNumber()
+        {
             var monksNumber = MonksNumbers.GetMonksNumber(GetValidNumber(txtNumber.Text));
             txtMonksNumber.Text = "";
 

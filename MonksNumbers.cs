@@ -338,11 +338,15 @@
                 {1,1,1,1,0,0,0}
             }
         };
+        private const int TENS_OFFSET = 9;
+        private const int HUNDREDS_OFFSET = 18;
+        private const int THOUSANDS_OFFSET = 27;
 
-        public static int[,] GetMonksNumber(int number) {
+        public static int[,] GetMonksNumber(int number)
+        {
             if (number < 0 || number > 9999)
             {
-                return new int[6, 7];
+                throw new ArgumentOutOfRangeException(nameof(number), "Number must be in the range [0, 9999].");
             }
 
             if (number < 10)
@@ -351,35 +355,35 @@
             }
 
             var numbers = number.ToString().ToCharArray();
-            var singleArr = _monkNumbers[int.Parse(numbers[^1].ToString())]; // index 0-9 = 0=0,1=1,2=2,3=3,4=4,5=5,6=6,7=7,8=8,9=9
-            var tensArr = new int[6, 7]; // index 10-18 = 10=10,11=20,12=30,13=40,14=50,15=60,16=70,17=80,18=90
-            var hundredsArr = new int[6, 7]; // index 19-27 = 19=100,20=200,21=300,22=400,23=500,24=600,25=700,26=800,27=900
-            var tousandsArr = new int[6, 7]; // index 28-36 = 28=1000,29=2000,30=3000,31=4000,32=5000,33=6000,34=7000,35=8000,26=9000
+            var singleDigit2DArray = _monkNumbers[int.Parse(numbers[^1].ToString())];
+            var tens2DArray = new int[6, 7];
+            var hundreds2DArray = new int[6, 7];
+            var thousands2DArray = new int[6, 7];
 
             if (numbers.Length > 1 && numbers[^2] != '0')
             {
-                tensArr = _monkNumbers[9 + int.Parse(numbers[^2].ToString())];
+                tens2DArray = _monkNumbers[TENS_OFFSET + int.Parse(numbers[^2].ToString())];
             }
             if (numbers.Length > 2 && numbers[^3] != '0')
             {
-                hundredsArr = _monkNumbers[18 + int.Parse(numbers[^3].ToString())];
+                hundreds2DArray = _monkNumbers[HUNDREDS_OFFSET + int.Parse(numbers[^3].ToString())];
             }
             if (numbers.Length == 4 && numbers[0] != '0')
             {
-                tousandsArr = _monkNumbers[27 + int.Parse(numbers[0].ToString())];
+                thousands2DArray = _monkNumbers[THOUSANDS_OFFSET + int.Parse(numbers[0].ToString())];
             }
 
-            // add all arrays into one combined one
-            int[,] result = new int[6, 7];
-            for (int i = 0; i < singleArr.GetLength(0); i++)
+            // Combine arrays
+            int[,] combined2DArray = new int[6, 7];
+            for (int i = 0; i < singleDigit2DArray.GetLength(0); i++)
             {
-                for (int j = 0; j < singleArr.GetLength(1); j++)
+                for (int j = 0; j < singleDigit2DArray.GetLength(1); j++)
                 {
-                    result[i, j] = singleArr[i, j] == 1 || tensArr[i, j] == 1 || hundredsArr[i, j] == 1 || tousandsArr[i, j] == 1 ? 1 : 0;
+                    combined2DArray[i, j] = singleDigit2DArray[i, j] == 1 || tens2DArray[i, j] == 1 || hundreds2DArray[i, j] == 1 || thousands2DArray[i, j] == 1 ? 1 : 0;
                 }
             }
 
-            return result;
+            return combined2DArray;
         }
     }
 }
