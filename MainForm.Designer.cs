@@ -34,28 +34,30 @@
             btnGet = new Button();
             txtMonksNumber = new TextBox();
             toolTip = new ToolTip(components);
+            pictureBox = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             SuspendLayout();
-            //
+            // 
             // txtNumber
-            //
+            // 
             txtNumber.Location = new Point(201, 12);
             txtNumber.MaxLength = 4;
             txtNumber.Name = "txtNumber";
             txtNumber.Size = new Size(225, 43);
             txtNumber.TabIndex = 0;
             toolTip.SetToolTip(txtNumber, "\r\nValid number is 0-9999\r\n");
-            //
+            // 
             // lblEnterNumber
-            //
+            // 
             lblEnterNumber.AutoSize = true;
             lblEnterNumber.Location = new Point(12, 15);
             lblEnterNumber.Name = "lblEnterNumber";
             lblEnterNumber.Size = new Size(183, 37);
             lblEnterNumber.TabIndex = 1;
             lblEnterNumber.Text = "Enter number:";
-            //
+            // 
             // btnGet
-            //
+            // 
             btnGet.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnGet.Location = new Point(432, 12);
             btnGet.Name = "btnGet";
@@ -65,29 +67,41 @@
             toolTip.SetToolTip(btnGet, "\r\nValid number is 0-9999\r\n");
             btnGet.UseVisualStyleBackColor = true;
             btnGet.Click += Get_Click;
-            //
+            // 
             // txtMonksNumber
-            //
+            // 
             txtMonksNumber.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtMonksNumber.Font = new Font("Aurulent Sans Mono", 8F, FontStyle.Regular, GraphicsUnit.Point);
             txtMonksNumber.Location = new Point(11, 89);
             txtMonksNumber.Multiline = true;
             txtMonksNumber.Name = "txtMonksNumber";
             txtMonksNumber.ReadOnly = true;
-            txtMonksNumber.Size = new Size(777, 349);
+            txtMonksNumber.Size = new Size(415, 349);
             txtMonksNumber.TabIndex = 3;
-            //
+            // 
             // toolTip
-            //
+            // 
             toolTip.ShowAlways = true;
             toolTip.ToolTipIcon = ToolTipIcon.Info;
             toolTip.ToolTipTitle = "Monks numbering system";
-            //
+            // 
+            // pictureBox
+            // 
+            pictureBox.BackColor = Color.White;
+            pictureBox.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox.Location = new Point(441, 60);
+            pictureBox.Name = "pictureBox";
+            pictureBox.Size = new Size(320, 320);
+            pictureBox.TabIndex = 4;
+            pictureBox.TabStop = false;
+            // 
             // MainForm
-            //
+            // 
             AutoScaleDimensions = new SizeF(15F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox);
             Controls.Add(txtMonksNumber);
             Controls.Add(btnGet);
             Controls.Add(lblEnterNumber);
@@ -98,6 +112,7 @@
             Name = "MainForm";
             ShowIcon = false;
             Text = "Monks numbering system";
+            ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -109,5 +124,6 @@
         private Button btnGet;
         private TextBox txtMonksNumber;
         private ToolTip toolTip;
+        private PictureBox pictureBox;
     }
 }
